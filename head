@@ -1,0 +1,220 @@
+import Head from 'next/head'
+
+export default function Home(){
+  // NOTE: This is a single-file Next.js + Tailwind-compatible page component
+  // It is a production-ready layout stub for RODI DUST Marketing & Distributions
+  // Use with a Next.js app (app or pages router). TailwindCSS must be configured.
+
+  const brands = [
+    'Shree Flyash', 'Finecrete', 'Magicrete', 'Dlite', 'Birla NuVo',
+    'Renacon', 'Greenstone', 'MagnaGreen', 'Biltech', 'Conecc',
+    'Ecolite', 'Infra.Market', 'Aercon', 'Meghalite', 'JK Lakshmi',
+    'Fusion', 'Brikolite', 'GoGreen', 'Ashtech', 'Clavecon'
+  ]
+
+  const openWhatsApp = (message='Hello RODI DUST, I need a quote for AAC Blocks')=>{
+    const phone = '919582872872' // international format without +
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+    window.open(url, '_blank')
+  }
+
+  return (
+    <>
+      <Head>
+        <title>RODI DUST — AAC Blocks Dealer & Distributor | Delhi NCR & Pan-India</title>
+        <meta name="description" content="Authorized dealer & distributor of 20+ AAC block brands. Bulk supply, technical support, adhesives & mortars. Call 9582-872-872." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* JSON-LD LocalBusiness schema (minimal) */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"LocalBusiness",
+          "name":"RODI DUST MARKETING & DISTRIBUTIONS PVT. LTD.",
+          "telephone":"+91 9582872872",
+          "email":"sales@rodidust.com",
+          "address":{
+            "@type":"PostalAddress",
+            "addressLocality":"Delhi NCR",
+            "addressCountry":"IN"
+          },
+          "url":"https://www.rodidust.com",
+          "sameAs":[]
+        })}} />
+      </Head>
+
+      <div className="min-h-screen bg-gray-50 text-slate-900">
+
+        {/* Sticky Topbar */}
+        <div className="bg-white shadow-sm sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center font-bold text-white">RD</div>
+              <div>
+                <div className="font-semibold">RODI DUST</div>
+                <div className="text-xs text-slate-500">AAC Blocks • Adhesives • Mortars • Construction Materials</div>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center gap-4">
+              <a href="tel:+919582872872" className="text-sm font-medium">Call: 9582-872-872</a>
+              <button onClick={()=>openWhatsApp()} className="px-4 py-2 bg-green-600 text-white rounded-md text-sm">WhatsApp</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Hero */}
+        <header className="bg-white">
+          <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-extrabold">Genuine AAC Blocks from 20+ Top Brands — Pan-India Supply</h1>
+              <p className="mt-4 text-slate-600">Direct-from-plant sourcing, verified lots, fast delivery & technical support. Get bulk pricing, BOQ help and installation guidance.</p>
+
+              <div className="mt-6 flex gap-3">
+                <button onClick={()=>document.getElementById('quote-form')?.scrollIntoView({behavior:'smooth'})} className="px-5 py-3 bg-blue-600 text-white rounded-md font-semibold">Get Best Quote</button>
+                <button onClick={()=>openWhatsApp('Hello, I want AAC Blocks quote by brand & city')} className="px-5 py-3 border border-slate-200 rounded-md">Chat on WhatsApp</button>
+              </div>
+
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="p-3 bg-slate-50 rounded-lg">
+                  <div className="text-xs text-slate-500">Trusted by</div>
+                  <div className="font-semibold">1000+ Sites</div>
+                </div>
+                <div className="p-3 bg-slate-50 rounded-lg">
+                  <div className="text-xs text-slate-500">Delivery</div>
+                  <div className="font-semibold">PAN-India</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-sm">
+              <div className="text-sm font-medium text-slate-700">Quick Quote</div>
+              <form id="quote-form" className="mt-4 grid gap-3" onSubmit={(e)=>{e.preventDefault(); openWhatsApp('Requesting a quote: '+ new FormData(e.target).get('project'))}}>
+                <input name="name" required placeholder="Your name" className="px-3 py-2 border rounded-md" />
+                <input name="phone" required placeholder="Phone (e.g. 9582872872)" className="px-3 py-2 border rounded-md" />
+                <input name="city" placeholder="City (e.g. Gurgaon)" className="px-3 py-2 border rounded-md" />
+                <select name="brand" className="px-3 py-2 border rounded-md">
+                  <option value="">Preferred Brand (optional)</option>
+                  {brands.map(b=> <option key={b} value={b}>{b}</option>)}
+                </select>
+                <input name="quantity" placeholder="Quantity (in nos / m3)" className="px-3 py-2 border rounded-md" />
+                <textarea name="project" placeholder="Project details / timeline (optional)" className="px-3 py-2 border rounded-md"></textarea>
+                <div className="flex gap-2">
+                  <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md">Send via WhatsApp</button>
+                  <button type="button" onClick={()=>window.location.href='mailto:sales@rodidust.com?subject=Quote Request'} className="px-4 py-2 border rounded-md">Email</button>
+                </div>
+              </form>
+
+              <div className="mt-4 text-xs text-slate-500">Or call: <a href="tel:+919582872872" className="text-slate-700">9582-872-872</a></div>
+            </div>
+          </div>
+        </header>
+
+        {/* Brands Marquee */}
+        <section className="max-w-7xl mx-auto px-4 py-8">
+          <h2 className="text-xl font-semibold">Brands We Supply</h2>
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-5 gap-4">
+            {brands.map((b,i)=> (
+              <div key={i} className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center text-center text-sm">
+                <div>
+                  <div className="font-medium">{b}</div>
+                  <div className="text-xs text-slate-400">AAC Blocks</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Core Products */}
+        <section className="max-w-7xl mx-auto px-4 py-8">
+          <h2 className="text-xl font-semibold">Our Products</h2>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-white rounded-lg shadow-sm">
+              <h3 className="font-semibold">AAC Blocks</h3>
+              <p className="mt-2 text-sm text-slate-600">Sizes: 625×200×(100|125|150|200|230) mm — density & compressive strength options. IS-compliant.</p>
+              <div className="mt-3 flex gap-2">
+                <a href="/products/aac-blocks" className="text-sm underline">View Details</a>
+                <button onClick={()=>openWhatsApp('Need AAC Blocks quote')} className="text-sm px-3 py-1 border rounded-md">Quote</button>
+              </div>
+            </div>
+
+            <div className="p-6 bg-white rounded-lg shadow-sm">
+              <h3 className="font-semibold">Block Jointing Mortar</h3>
+              <p className="mt-2 text-sm text-slate-600">High-bond masonry mortar for thin-joint AAC installations. Coverage calculators included.</p>
+              <div className="mt-3 flex gap-2">
+                <a href="/products/block-jointing-mortar" className="text-sm underline">View Details</a>
+                <button onClick={()=>openWhatsApp('Need mortar quote')} className="text-sm px-3 py-1 border rounded-md">Quote</button>
+              </div>
+            </div>
+
+            <div className="p-6 bg-white rounded-lg shadow-sm">
+              <h3 className="font-semibold">AAC Adhesive</h3>
+              <p className="mt-2 text-sm text-slate-600">Ready-to-use adhesives for thin-bed jointing. Faster, cleaner, and thermally efficient.</p>
+              <div className="mt-3 flex gap-2">
+                <a href="/products/adhesive" className="text-sm underline">View Details</a>
+                <button onClick={()=>openWhatsApp('Need adhesive quote')} className="text-sm px-3 py-1 border rounded-md">Quote</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Calculators teaser */}
+        <section className="max-w-7xl mx-auto px-4 py-8">
+          <h2 className="text-xl font-semibold">Calculators</h2>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-white rounded-lg shadow-sm">
+              <div className="font-semibold">Blocks per m³</div>
+              <div className="text-sm text-slate-600 mt-2">Quick conversion for the most common block sizes. Full calculator will be integrated.</div>
+            </div>
+            <div className="p-4 bg-white rounded-lg shadow-sm">
+              <div className="font-semibold">Mortar Coverage</div>
+              <div className="text-sm text-slate-600 mt-2">Bags required for thin-joint mortar — downloadable BOQ.</div>
+            </div>
+            <div className="p-4 bg-white rounded-lg shadow-sm">
+              <div className="font-semibold">Cost Comparison</div>
+              <div className="text-sm text-slate-600 mt-2">AAC vs Clay Brick — estimated savings in material & time.</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Blog teaser */}
+        <section className="max-w-7xl mx-auto px-4 py-8">
+          <h2 className="text-xl font-semibold">From the Knowledge Hub</h2>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <article className="p-4 bg-white rounded-lg shadow-sm">
+              <h4 className="font-semibold">AAC Blocks Price Guide 2025 — Delhi NCR</h4>
+              <p className="text-sm text-slate-600 mt-2">Live guide with brand-wise price ranges and procurement tips.</p>
+            </article>
+            <article className="p-4 bg-white rounded-lg shadow-sm">
+              <h4 className="font-semibold">AAC vs Red Brick — Why Builders are Switching</h4>
+              <p className="text-sm text-slate-600 mt-2">Thermal performance, speed of build, and lifecycle cost analysis.</p>
+            </article>
+            <article className="p-4 bg-white rounded-lg shadow-sm">
+              <h4 className="font-semibold">Mortar vs Adhesive for AAC — A Practical Guide</h4>
+              <p className="text-sm text-slate-600 mt-2">When to choose thin-bed adhesive over conventional mortar.</p>
+            </article>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-10 bg-white border-t">
+          <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <div className="font-bold">RODI DUST</div>
+              <div className="text-sm text-slate-600 mt-2">AAC Blocks & Building Materials — Dealer & Distributor</div>
+            </div>
+            <div>
+              <div className="font-semibold">Contact</div>
+              <div className="text-sm text-slate-600 mt-2">Phone: <a href="tel:+919582872872">9582-872-872</a></div>
+              <div className="text-sm text-slate-600">Email: sales@rodidust.com</div>
+            </div>
+            <div>
+              <div className="font-semibold">Service Areas</div>
+              <div className="text-sm text-slate-600 mt-2">Delhi • Gurugram • Noida • Ghaziabad • Faridabad • Pan-India</div>
+            </div>
+          </div>
+          <div className="text-center text-xs text-slate-400 py-4">© {new Date().getFullYear()} RODI DUST MARKETING & DISTRIBUTIONS PVT. LTD. — All rights reserved</div>
+        </footer>
+
+      </div>
+    </>
+  )
+}
